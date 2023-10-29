@@ -154,10 +154,12 @@ contract Chat3_V1 is Ownable {
     }
 
     function setProtocolFeePercent(uint256 _feePercent) public onlyOwner {
+        require(_feePercent + subjectFeePercent <= 1 ether, "fee percent cannot be greater than 100%");
         protocolFeePercent = _feePercent;
     }
 
     function setSubjectFeePercent(uint256 _feePercent) public onlyOwner {
+        require(_feePercent + protocolFeePercent <= 1 ether, "fee percent cannot be greater than 100%");
         subjectFeePercent = _feePercent;
     }
 
